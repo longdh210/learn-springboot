@@ -25,9 +25,4 @@ public class StudentRepository {
         return listStudents;
     }
 
-    public Student getStudentById(int id) {
-        Integer inputId = id;
-        Student result = listStudents.stream().filter(student -> inputId.equals(Integer.valueOf(student.getId()))).findAny().orElse(null);
-        return  result;
-    }
 }

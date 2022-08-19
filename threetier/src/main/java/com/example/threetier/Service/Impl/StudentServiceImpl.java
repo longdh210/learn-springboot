@@ -21,13 +21,16 @@ public class StudentServiceImpl implements StudentService<Student> {
 
     @Override
     public List<Student> getAllStudentsSortedByAge() {
-        List<Student> listStudent = studentRepository.getAllStudent();
-        Collections.sort(listStudent, (o1, o2) -> o2.getAge() - o1.getAge());
-        return listStudent;
+        List<Student> listStudents = studentRepository.getAllStudent();
+        Collections.sort(listStudents, (o1, o2) -> o2.getAge() - o1.getAge());
+        return listStudents;
     }
 
     @Override
     public Student getStudentById(int id) {
-        return studentRepository.getStudentById(id);
+        List<Student> listStudents = studentRepository.getAllStudent();
+        Integer inputId = id;
+        Student result = listStudents.stream().filter(student -> inputId.equals(Integer.valueOf(student.getId()))).findAny().orElse(null);
+        return  result;
     }
 }
